@@ -8,6 +8,11 @@ pipeline {
               checkout scm
             }
         }
+         stage('Build') { 
+            steps {
+                sh 'npm install' 
+            }
+        }
         stage('Test') {
             steps {
                 echo 'Testing..'
