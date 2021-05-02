@@ -1,11 +1,22 @@
 pipeline {
+    agent any
 
-agent if any
-
-stage('Clone the repository') {
-
-checkout SCM
-
-}
-
+    stages {
+        stage('clone the repository') {
+            steps {
+                echo 'cloning the respository..'
+              checkout scm
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
 }
