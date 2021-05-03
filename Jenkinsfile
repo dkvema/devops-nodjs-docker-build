@@ -19,7 +19,7 @@ def generateVersionTag(){
 pipeline {
      
     agent any
-    
+      dockerfile true
       tools {nodejs "NodeJS"}
 
     stages {
@@ -56,8 +56,9 @@ pipeline {
         stage('docker build') {
             steps {
                 echo 'docker build....'
-                dockerImageName=buildDockerImage(app:appName,tag:versionTag)
-                echo "Image Name returned to Jenkins File :${dockerimageName}"
+               // docker image 
+               // dockerImageName=buildDockerImage(app:appName,tag:versionTag)
+               // echo "Image Name returned to Jenkins File :${dockerimageName}"
             }
         }
     }
