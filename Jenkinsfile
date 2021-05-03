@@ -22,6 +22,9 @@ pipeline {
       }
     }   
         stage('build') {
+            steps {
+                sh 'npm --version'
+            }
       steps {
           echo 'build..'
          sh 'npm start'
