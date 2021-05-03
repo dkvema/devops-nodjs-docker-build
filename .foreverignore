@@ -1,8 +1,2 @@
-node_modules/*
-logs/*
-conf/*
-htdocs/*
-*.log
-*.gif
-*.jpg
+
 *.html
