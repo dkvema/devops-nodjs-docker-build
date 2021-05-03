@@ -21,10 +21,15 @@ pipeline {
          sh 'npm test'
       }
     }   
-        stage('build') {
+        stage('npm version') { 
+            
             steps {
                 sh 'npm --version'
             }
+            
+        }
+        
+        stage('build') {   
       steps {
           echo 'build..'
          sh 'npm start'
