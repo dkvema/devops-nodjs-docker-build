@@ -21,17 +21,13 @@ pipeline {
          sh 'npm test'
       }
     }   
-        stage('npm version') { 
-            
-            steps {
-                sh 'npm --version'
-            }
-            
-        }
         
         stage('build') {   
       steps {
+          
           echo 'build..'
+      
+         sh 'npm --version'
          sh 'npm start'
       }
     }   
