@@ -1,16 +1,17 @@
 FROM node:14
 
 #create app directory
-WORKDIR /usr/src/app/
+WORKDIR /app
 
 #Install app dependencies
-COPY package*.json ./
+COPY package.json .
 
+#Install npm
 RUN npm install
 
 #Bundle app source
-COPY . .
+COPY . ./
 
-EXPOSE 8080
+EXPOSE 3000
 
 CMD["node","index.js"]
