@@ -7,7 +7,7 @@ def getGitCommitHash(){
     def result =sh(returnStdout:true,script:'git rev-parse--short HEAD'.trim()
     return result
 }
-def getGitCommitHash(){
+def generateVersionTag(){
     def gitCommitHash=getGitCommitHash() versionTag=env.BUILD_NUMBER + "-"+gitCommitHash
     return versionTag
     
