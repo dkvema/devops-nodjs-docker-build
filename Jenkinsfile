@@ -26,14 +26,8 @@ pipeline {
         
         stage('clone the repository') {
             steps {
-               
                 echo 'APPName:${AappName}'
                  echo 'versionTag:${versionTag}'
-              
-            }
-        }
-        stage('clone the repository') {
-            steps {
                 echo 'cloning the respository..'
               checkout scm
             }
