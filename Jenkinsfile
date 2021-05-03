@@ -46,7 +46,7 @@ pipeline {
           echo 'build..'
       
          sh 'npm --version'
-         c
+         
       }
     }   
         stage('docker build') {
