@@ -4,7 +4,7 @@ def dockerImageName
 def MAJOR_VERSION="1"
 def ARTIFACT_VERSION="${MAJOR_VERSION}.${BUILD_NUMBER}"
 def getGitCommitHash(){
-    def result =sh(returnStdout:true,script:'git rev-parse--short HEAD'.trim()
+    def result =sh(returnStdout:true,script:'git rev-parse--short HEAD'.trim())
     return result
 }
 def generateVersionTag(){
