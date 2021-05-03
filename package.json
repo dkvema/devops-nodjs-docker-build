@@ -6,7 +6,9 @@
   "scripts": {
     "start": "forever -w index.js",
     "test": "jest"
+    "dev": "forever -w --minUptime=1000 --spinSleepTime=1000 index.js"
   },
+  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dkvema/devops-nodjs-docker-build.git"
