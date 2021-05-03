@@ -15,16 +15,12 @@ pipeline {
                 sh 'npm install' 
             }
         }
-        stage('npm build') { 
-            steps {
-                sh "npm run build" 
-            }
-        }
         stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
+      steps {
+          echo 'Testing..'
+         sh 'npm test'
+      }
+    }   
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
