@@ -8,7 +8,8 @@ def getGitCommitHash(){
     return result
 }
 def generateVersionTag(){
-    def gitCommitHash=getGitCommitHash() versionTag=env.BUILD_NUMBER + "-"+gitCommitHash
+    def gitCommitHash=getGitCommitHash() 
+    versionTag=env.BUILD_NUMBER + "-"+gitCommitHash
     return versionTag
     
     
