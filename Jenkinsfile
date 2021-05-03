@@ -10,9 +10,14 @@ pipeline {
               checkout scm
             }
         }
-         stage('Build') { 
+         stage('npm install') { 
             steps {
                 sh 'npm install' 
+            }
+        }
+        stage('npm build') { 
+            steps {
+                sh 'npm run build' 
             }
         }
         stage('Test') {
