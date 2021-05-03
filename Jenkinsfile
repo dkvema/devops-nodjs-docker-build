@@ -23,6 +23,15 @@ pipeline {
       tools {nodejs "NodeJS"}
 
     stages {
+        
+        stage('clone the repository') {
+            steps {
+               
+                echo 'APPName:${AappName}'
+                 echo 'versionTag:${versionTag}'
+              
+            }
+        }
         stage('clone the repository') {
             steps {
                 echo 'cloning the respository..'
@@ -53,6 +62,8 @@ pipeline {
         stage('docker build') {
             steps {
                 echo 'docker build....'
+                dockerImageName=buildDockerImage(app:appName,tag:versionTag)
+                echo "Image Name returned to Jenkins File :${dockerimageName}"
             }
         }
     }
