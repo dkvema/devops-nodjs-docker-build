@@ -9,7 +9,7 @@ def getGitCommitHash(){
 }
 def generateVersionTag(){
     def gitCommitHash=getGitCommitHash() 
-    versionTag=env.BUILD_NUMBER + "-"+gitCommitHash
+    versionTag=${env.BUILD_NUMBER} + "-"+gitCommitHash
     return versionTag
     
     
@@ -30,7 +30,7 @@ pipeline {
         stage('clone the repository') {
             steps {
                 echo 'cloning the respository..'
-                echo " build version: ${MAJOR_VERSION}  ${env.BUILD_ID} on ${env.JENKINS_URL} "
+                echo " build version: ${MAJOR_VERSION}.${env.BUILD_ID}"
                   echo "APPName:${appName}"
                  
              
@@ -48,6 +48,13 @@ pipeline {
          sh 'npm test'
       }
     }   
+        stage('docker build') {
+            steps {
+                echo 'docker build....'
+               // docker image 
+                dockerImageName=buildDockerImage(app:appName,tag:versionTag)
+                echo "Image Name returned to Jenkins File :${dockerImageName}"
+            }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
