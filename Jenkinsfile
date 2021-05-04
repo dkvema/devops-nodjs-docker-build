@@ -19,7 +19,7 @@ def generateVersionTag(){
 pipeline {
      
     agent any
-      dockerfile true
+     // dockerfile true
       tools {nodejs "NodeJS"}
 
     stages {
