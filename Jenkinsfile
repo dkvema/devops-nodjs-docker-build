@@ -53,8 +53,9 @@ pipeline {
             steps {
                 echo 'docker build....'
                // docker image 
-                dockerImageName=buildDockerImage(app:appName,tag:versionTag)
-                echo "Image Name returned to Jenkins File :${dockerImageName}"
+                docker build -t nodejs-docker .
+              //  dockerImageName=buildDockerImage(app:appName,tag:versionTag)
+               // echo "Image Name returned to Jenkins File :${dockerImageName}"
             }
         }
         stage('Deploy') {
