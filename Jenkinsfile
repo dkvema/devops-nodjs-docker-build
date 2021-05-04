@@ -19,6 +19,7 @@ pipeline {
     
     environment{
        dockerImage=''
+        registry='devendravemadevops/nodejs'
         
     }
     
@@ -57,12 +58,20 @@ pipeline {
         stage('Docker build') {
             steps {
                 echo 'docker build....'
+                dockerImage=docker.build registry
                // docker image 
-              sh   'docker build -t nodejs-docker . '
+            //  sh   'docker build -t nodejs-docker . '
               //  dockerImageName=buildDockerImage(app:appName,tag:versionTag)
                // echo "Image Name returned to Jenkins File :${dockerImageName}"
             }
         }
+        stage('Docker upload to dockerhub') {
+            steps {
+                script{
+                    dockerImage.run("-p 8096:3000 --rm --name nodejs-docker")
+                }
+                echo 'Docker running....'
+            }
         stage('Docker run') {
             steps {
                 script{
