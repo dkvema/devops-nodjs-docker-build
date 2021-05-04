@@ -65,13 +65,7 @@ pipeline {
                // echo "Image Name returned to Jenkins File :${dockerImageName}"
             }
         }
-        stage('Docker upload to dockerhub') {
-            steps {
-                script{
-                    dockerImage.run("-p 8096:3000 --rm --name nodejs-docker")
-                }
-                echo 'Docker running....'
-            }
+        
         stage('Docker run') {
             steps {
                 script{
