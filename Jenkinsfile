@@ -68,7 +68,7 @@ pipeline {
                 
                  echo 'docker build....'
       
-                sh   'docker push devendravemadevops/nodejs'
+                sh   'docker push devendravemadevops/nodejs-docker'
                 
                
             
