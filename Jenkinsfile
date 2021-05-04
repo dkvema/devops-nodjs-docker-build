@@ -18,7 +18,7 @@ pipeline {
     agent any
     
     environment{
-       dockerimage=''
+       dockerImage=''
         
     }
     
