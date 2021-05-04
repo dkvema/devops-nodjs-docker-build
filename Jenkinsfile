@@ -19,7 +19,7 @@ pipeline {
     
     environment{
        dockerImage=''
-        registry='devendravemadevops/nodejs'
+        registry='devendravemadevops/nodejs-docker'
         
     }
     
