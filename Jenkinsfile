@@ -27,7 +27,7 @@ pipeline {
       tools {nodejs "NodeJS"}
 
     stages {
-        stage('clone the repository') {
+        stage('Clone the repository') {
             steps {
                 echo 'cloning the respository..'
                 echo " build version: ${MAJOR_VERSION}.${env.BUILD_ID}"
@@ -37,7 +37,7 @@ pipeline {
               checkout scm
             }
         }
-         stage('npm install') { 
+         stage('NPM install') { 
             steps {
                 sh 'npm install' 
             }
@@ -49,7 +49,7 @@ pipeline {
       }
     }   
      
-        stage('docker build') {
+        stage('Docker build') {
             steps {
                 echo 'docker build....'
                // docker image 
@@ -58,9 +58,12 @@ pipeline {
                // echo "Image Name returned to Jenkins File :${dockerImageName}"
             }
         }
-        stage('Deploy') {
+        stage('Docker run') {
             steps {
-                echo 'Deploying....'
+                script{
+                    dockerImage.run("-p 8096:3000 --rm --name nodejs-docker")
+                }
+                echo 'Docker running....'
             }
         }
     }
