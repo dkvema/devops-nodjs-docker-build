@@ -18,7 +18,7 @@ pipeline {
     agent any
     
      options {
-         echo 'cloning the respository..'
+        
         // This is required if you want to clean before build
         skipDefaultCheckout(true)
     }
