@@ -55,6 +55,7 @@ pipeline {
                 dockerImageName=buildDockerImage(app:appName,tag:versionTag)
                 echo "Image Name returned to Jenkins File :${dockerImageName}"
             }
+        }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
