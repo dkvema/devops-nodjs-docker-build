@@ -57,8 +57,11 @@ pipeline {
      
         stage('Docker build') {
             steps {
+                script{
+                    dockerImage=docker.build registry
+                }
                 echo 'docker build....'
-                dockerImage=docker.build registry
+                
                // docker image 
             //  sh   'docker build -t nodejs-docker . '
               //  dockerImageName=buildDockerImage(app:appName,tag:versionTag)
