@@ -48,6 +48,11 @@ pipeline {
          sh 'npm test'
       }
     }   
+         stage('Initialize'){
+        def dockerHome = tool 'myDocker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"
+             echo "docker path ${dockerHome}/bin:${env.PATH}"
+    }
         stage('docker build') {
             steps {
                 echo 'docker build....'
