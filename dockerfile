@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:12.4.0
 
 #create app directory
 WORKDIR /app
@@ -10,7 +10,7 @@ COPY package.json .
 RUN npm install
 
 #Bundle app source
-COPY . ./
+COPY . .
 
 EXPOSE 3000
 
