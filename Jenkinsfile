@@ -30,7 +30,7 @@ pipeline {
         stage('clone the repository') {
             steps {
                 echo 'cloning the respository..'
-                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                echo " build version: ${MAJOR_VERSION}  ${env.BUILD_ID} on ${env.JENKINS_URL} "
                   echo "APPName:${appName}"
                  
              
