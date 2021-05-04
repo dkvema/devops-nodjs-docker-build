@@ -57,15 +57,21 @@ pipeline {
      
         stage('Docker build') {
             steps {
-                script{
-                    dockerImage=docker.build registry
-                }
-                echo 'docker build....'
+      
+                echo "docker build...."
+                sh   'docker build -t nodejs-docker . '
+            
+            }
+        }
+        stage('Docker upload') {
+            steps {
                 
-               // docker image 
-            //  sh   'docker build -t nodejs-docker . '
-              //  dockerImageName=buildDockerImage(app:appName,tag:versionTag)
-               // echo "Image Name returned to Jenkins File :${dockerImageName}"
+                 echo 'docker build....'
+      
+                sh   'docker push devendravemadevops/'
+                
+               
+            
             }
         }
         
