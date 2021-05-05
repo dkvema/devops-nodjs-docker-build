@@ -20,6 +20,7 @@ pipeline {
     environment{
        dockerImage=''
         registry='devendravemadevops/nodejs-docker'
+        BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
         
     }
     
@@ -31,6 +32,8 @@ pipeline {
     
 
       tools {nodejs "NodeJS"}
+    
+
 
     stages {
         
@@ -39,11 +42,12 @@ pipeline {
                 script{
                     if("${GIT_BRANCH}"=='release'){
                         echo "This is release branch"
-                        env.DATA_FILE="question.json"
+                        env.DATA_FILE='question.json'
+                        
                        }
                     if("${GIT_BRANCH}"=='main'){
                             echo "This is release branch"
-                            env.DATA_FILE="Questions-test.json"
+                            env.DATA_FILE='Questions-test.json'
                         
                     }
                     
