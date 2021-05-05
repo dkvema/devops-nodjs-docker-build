@@ -44,7 +44,10 @@ pipeline {
                     if("${env.BRANCH_NAME}"=='main'){
                             echo "This is release branch"
                             env.DATA_FILE="Questions-test.json"
+                        
                     }
+                    
+                    echo "DATA_FILE_VALUE=${env.DATA_FILE}"
                 }
             }
         }
