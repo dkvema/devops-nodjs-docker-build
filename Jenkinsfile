@@ -95,7 +95,7 @@ pipeline {
         stage('Docker run') {
             steps {
                 script{
-                    dockerImage.run("-p 8096:3000 --rm --name nodejs-docker")
+                    docker run("-p 8096:3000 --rm --name nodejs-docker")
                 }
                 echo 'Docker running....'
             }
