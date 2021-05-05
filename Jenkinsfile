@@ -37,25 +37,7 @@ pipeline {
 
     stages {
         
-        stage('data Loading'){
-            steps{
-                script{
-                    if("${env.BRANCH_NAME}"=='release'){
-                        echo "This is release branch"
-                        env.DATA_FILE='question.json'
-                        
-                       }
-                    if("${env.BRANCH_NAME}"=='main'){
-                            echo "This is release branch"
-                            env.DATA_FILE= "Questions-test.json"
-                        
-                    }
-                    
-                    echo "DATA_FILE_VALUE=${env.DATA_FILE}"
-                    echo "BRANCH_NAME=${env.BRANCH_NAME}"
-                }
-            }
-        }
+       
         stage('Clone the repository') {
             steps {
                 echo 'cloning the respository..'
@@ -69,6 +51,25 @@ pipeline {
          stage('NPM install') { 
             steps {
                 sh 'npm install' 
+                sh 'npm install dotenv' 
+            }
+        }
+         stage('data Loading'){
+            steps{
+                script{
+                    if("${GIT_BRANCH}"=='release'){
+                        echo "This is release branch"
+                        env.DATA_FILE='question.json'
+                        
+                       }
+                    if("${GIT_BRANCH}"=='main'){
+                            echo "This is release branch"
+                            env.DATA_FILE= "Questions-test.json"
+                        
+                    }
+                    
+                    echo "DATA_FILE_VALUE=${env.DATA_FILE}"
+                }
             }
         }
         stage('Test') {
