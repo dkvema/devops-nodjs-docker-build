@@ -57,18 +57,19 @@ pipeline {
          stage('data Loading'){
             steps{
                 script{
-                    if("${GIT_BRANCH}"=='release'){
+                    if("${env.BRANCH_NAME}"=='release'){
                         echo "This is release branch"
                         env.DATA_FILE='question.json'
                         
                        }
-                    if("${GIT_BRANCH}"=='main'){
+                    if("${env.BRANCH_NAME}"=='main'){
                             echo "This is release branch"
                             env.DATA_FILE= "Questions-test.json"
                         
                     }
                     
                     echo "DATA_FILE_VALUE=${env.DATA_FILE}"
+                    echo "BRANCH_NAME=${env.BRANCH_NAME}"
                 }
             }
         }
