@@ -40,23 +40,11 @@ pipeline {
                     if("${env.BRANCH_NAME}"==release){
                         echo "This is release branch"
                         
-                        withcredentials([file(credentialsId:'dockerhub_id',Variable: 'File')]){
-                            
-                            sh "cp \$FILE ./question.json"
-                        }
-                        elseif("${env.BRANCH_NAME}"==staging){
+                       env.DATA_FILE="question.json"
+                    }elseif("${env.BRANCH_NAME}"==staging){
                             echo "This is release branch"
-                            withcredentials([file(credentialsId:'dockerhub_id',Variable: 'File')]){
-                                
-                                sh "cp \$FILE ./question-test.json"
-                            }
-                        }
-                        
-                        
+                            env.DATA_FILE="question-test.json"
                     }
-                     
-                
-                
                 }
             }
         }
