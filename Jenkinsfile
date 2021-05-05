@@ -60,6 +60,7 @@ pipeline {
       
                 echo "docker build...."
                 sh   'docker build -t nodejs-docker . '
+                
             
             }
         }
