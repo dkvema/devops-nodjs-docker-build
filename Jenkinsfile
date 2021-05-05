@@ -70,7 +70,7 @@ pipeline {
                  echo 'docker stop container'
       
                 sh   'docker ps-f name=nodejs-docker -q |xargs --no-run-if-empty docker container stop'
-                sh 'docker container ls -a fname=nodejs-docker -q |xargs -r docker container rm'
+                sh 'docker container ls-a fname=nodejs-docker -q |xargs -r docker container rm'
             
             }
         }
