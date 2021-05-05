@@ -11,7 +11,7 @@ module.exports = {
     const prompt = req.query.category ? prompts.getRandom(categoryIndex) : prompts.getRandom();
 
     res.render('index', {
-      title: '1to1tool',
+      title: 'nodejs devops asessment ',
       prompt,
       question,
       categories: cats,
