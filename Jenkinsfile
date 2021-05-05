@@ -59,7 +59,7 @@ pipeline {
             steps {
       
                 echo "docker build...."
-                sh   'docker.build -t nodejs-docker . '
+                sh   'docker build -t nodejs-docker . '
             
             }
         }
