@@ -33,6 +33,33 @@ pipeline {
       tools {nodejs "NodeJS"}
 
     stages {
+        
+        stage('data Loading'){
+            steps{
+                script{
+                    if("${env.BRANCH_NAME}"==release){
+                        echo "This is release branch"
+                        
+                        withcredentials([file(credentialsId:'dockerhub_id',Variable: 'File')]){
+                            
+                            sh "cp \$FILE ./question.json"
+                        }
+                        elseif("${env.BRANCH_NAME}"==staging){
+                            echo "This is release branch"
+                            withcredentials([file(credentialsId:'dockerhub_id',Variable: 'File')]){
+                                
+                                sh "cp \$FILE ./question-test.json"
+                            }
+                        }
+                        
+                        
+                    }
+                     
+                
+                
+                }
+            }
+        }
         stage('Clone the repository') {
             steps {
                 echo 'cloning the respository..'
