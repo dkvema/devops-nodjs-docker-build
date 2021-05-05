@@ -17,6 +17,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Mount routes
 app.use('/', routes);
 
+//added newly devenda start
+const dotenv = require('dotenv');
+dotenv.config();
+console.log(`Your port is ${process.env.PORT}`); // 8626
+
+//added newly devenda end
+
 // Start server
 var port = process.env.PORT || '3000';
 app.set('port', port);
