@@ -1,4 +1,4 @@
-def appName='nodejs-public-app'
+def appName='nodejs-docker-app'
 def versiontag
 def dockerImageName
 def MAJOR_VERSION="1"
@@ -82,7 +82,8 @@ pipeline {
             steps {
       
                 echo "docker build...."
-                sh   'docker build -t nodejs-docker:$env.BUILD_TAG . '
+                sh   "docker build -t nodejs-docker:$env.BUILD_TAG . "
+                 
                 // sh   'docker build -t nodejs-docker . '
                 
             
