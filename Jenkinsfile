@@ -17,10 +17,7 @@ def generateVersionTag(){
 pipeline {
     agent any
     
-       def branch_nem = scm.branches[0].name
-    if (branch_nem.contains("*/")) {
-    branch_nem = branch_nem.split("\\*/")[1]
-    }
+     
       
     
      options {
@@ -39,15 +36,15 @@ pipeline {
        
         stage('Clone the repository') {
             steps {
+                echo sh(script: 'env|sort', returnStdout: true)
                 echo 'cloning the respository..'
                 echo " build version: ${MAJOR_VERSION}.${env.BUILD_ID}"
                   echo "APPName:${appName}"
-                 
-             
               checkout scm
+               // echo 'branch_nem'
             }
             
-            echo 'branch_nem'
+            
         }
          stage('NPM install') { 
             steps {
