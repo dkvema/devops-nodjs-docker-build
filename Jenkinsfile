@@ -105,7 +105,8 @@ pipeline {
         stage('Docker run') {
             steps {
                 script{
-                    docker run("-p 8096:3000 --rm --name nodejs-docker")
+                   // docker run ("-p 8096:3000 --rm --name nodejs-docker
+                     docker run -p 8096:3000 nodejs-docker
                 }
                 echo 'Docker running....'
             }
