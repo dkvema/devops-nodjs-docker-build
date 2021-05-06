@@ -82,7 +82,8 @@ pipeline {
             steps {
       
                 echo "docker build...."
-                sh   "docker build -t nodejs-docker:$env.BUILD_TAG . "
+                sh   "docker build -t $env.BUILD_TAG . "
+                //sh   "docker build -t nodejs-docker:$env.BUILD_TAG . "
                  
                 // sh   'docker build -t nodejs-docker . '
                 
