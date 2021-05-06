@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "forever -w index.js",
-    "test": "jest"
+    "test": "echo no jest"
     
   },
   "dev": "forever -w --minUptime=1000 --spinSleepTime=1000 index.js",
