@@ -78,37 +78,36 @@ pipeline {
       }
     }   
      
-        stage('Docker build') {
+        stage('Build Docker Image') {
             steps {
       
                 echo "docker build...."
-                sh   "docker build -t $env.BUILD_TAG . "
-                //sh   "docker build -t nodejs-docker:$env.BUILD_TAG . "
-                 
-                // sh   'docker build -t nodejs-docker . '
+                sh   "docker build -t ${appName} . "
                 
+                //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
+               //  sh "docker tag ${appName}:latest ${IMAGE_REPO}/${appName}:${VERSION}"
             
             }
         }
         
-        stage('Docker stop container') {
-            steps {
-                
-                 echo 'docker stop container'
-                //  sh   'docker stop $(docker ps -aq)'
-                
-               sh   'docker ps -f name=nodejs-docker -q |xargs --no-run-if-empty docker container stop'
-              sh 'docker container ls -a -fname=nodejs-docker -q | xargs -r docker container rm'
-            
-            }
-        }
         
+        //***** The below piece of code will be  used to push the image to docker hub
+        
+      // stage('Push Docker Image'){
+       // withCredentials([string(credentialsId: 'DOKCER_HUB_PASSWORD', variable: 'DOKCER_HUB_PASSWORD')]) {
+        //  sh "docker login -u {dockerId} -p ${DOKCER_HUB_PASSWORD}"
+        //}
+       // sh 'docker push {dockerId}/{projectName}:${BUILD_NUMBER}'
+      //}
+  
         stage('Docker run') {
             steps {
                 script{
                     
+                     sudo "docker container run -itd --name ${appName} -p 3000 "
+                    //sudo "docker container run -itd --name ${appName}:$env.BUILD_TAG -p 3000 "
                   // sudo  docker container run -itd --name  nodejs-docker:$env.BUILD_NUMBER  -p 3000 
-                   docker run ("-p 8096:3000 --rm --name nodejs-docker")
+                  // docker run ("-p 8096:3000 --rm --name nodejs-docker")
                   //  docker run -p 8096:3000 nodejs-docker
                 }
                 echo 'Docker running....'
