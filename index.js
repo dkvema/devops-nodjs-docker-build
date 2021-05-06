@@ -1,4 +1,4 @@
-const {loadSecrets} = require('./secrets.js');
+const {loadSecrets} = require('./secrets_getsecretvalue.js');
 loadSecrets()
   .then(()=>{
     const express = require('express');
