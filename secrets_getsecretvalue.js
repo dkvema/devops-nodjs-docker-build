@@ -1,6 +1,7 @@
 // Load the AWS SDK
 var AWS = require('aws-sdk'),
-    region = "singapore",
+    //region = "singapore",
+     region="ap-southeast-1",
     secretName = "nodejs-docker-secrets",
     secret,
     decodedBinarySecret;
