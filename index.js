@@ -3,6 +3,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const routes = require('./routes/index');
+const secrets = require('aws-secrets');
 const app = express();
 
 // View enginer setup
