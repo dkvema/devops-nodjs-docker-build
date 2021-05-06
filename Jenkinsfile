@@ -82,7 +82,8 @@ pipeline {
             steps {
       
                 echo "docker build...."
-                sh   'docker build -t nodejs-docker:$env.BUILD_NUMBER . '
+               // sh   'docker build -t nodejs-docker:$env.BUILD_NUMBER . '
+                 sh   'docker build -t nodejs-docker . '
                 
             
             }
@@ -105,7 +106,7 @@ pipeline {
                 script{
                     
                   // sudo  docker container run -itd --name  nodejs-docker:$env.BUILD_NUMBER  -p 3000 
-                  // docker run ("-p 8096:3000 --rm --name nodejs-docker")
+                   docker run ("-p 8096:3000 --rm --name nodejs-docker")
                     // docker run -p 8096:3000 nodejs-docker
                 }
                 echo 'Docker running....'
