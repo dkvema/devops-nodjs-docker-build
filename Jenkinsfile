@@ -25,9 +25,7 @@ pipeline {
         // This is required if you want to clean before build
         skipDefaultCheckout(true)
     }
-     environment {
-       DATA_FILE= "Questions-test.json"
-    }
+    
 
       tools {nodejs "NodeJS"}
     
