@@ -59,16 +59,16 @@ pipeline {
                 script{
                     if("${env.BRANCH_NAME}"=='release'){
                         echo "This is release branch"
-                        env.DATA_FILE='question.json'
+                     //   env.DATA_FILE='question.json'
                         
                        }
                     if("${env.BRANCH_NAME}"=='main'){
                             echo "This is release branch"
-                            env.DATA_FILE= "Questions-test.json"
+                         //   env.DATA_FILE= "Questions-test.json"
                         
                     }
                     
-                    echo "DATA_FILE_VALUE=${env.DATA_FILE}"
+                  //  echo "DATA_FILE_VALUE=${env.DATA_FILE}"
                     echo "BRANCH_NAME=${env.BRANCH_NAME}"
                 }
             }
@@ -84,7 +84,7 @@ pipeline {
             steps {
       
                 echo "docker build...."
-                sh   'docker build -t nodejs-docker . '
+                sh   'docker build -t nodejs-docker:$env.BUILD_NUMBER . '
                 
             
             }
@@ -105,7 +105,9 @@ pipeline {
         stage('Docker run') {
             steps {
                 script{
-                   docker run ("-p 8096:3000 --rm --name nodejs-docker")
+                    
+                    docker container run -itd --name  nodejs-docker:$env.BUILD_NUMBER  -p 3000 
+                  // docker run ("-p 8096:3000 --rm --name nodejs-docker")
                     // docker run -p 8096:3000 nodejs-docker
                 }
                 echo 'Docker running....'
