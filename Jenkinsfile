@@ -65,6 +65,8 @@ pipeline {
                        echo 'Docker running....+${env.BRANCH_NAME}'
                        }
                  }
+            }
+           steps{
                if("${env.BRANCH_NAME}"=='master'){
                         echo "This is master branch"
                    script{
@@ -73,7 +75,7 @@ pipeline {
                     }
                     echo 'Docker running....'
                 }
-                        
+           }          
            }
 
             }
