@@ -52,43 +52,52 @@ pipeline {
                 sh 'npm install dotenv' 
             }
         }
-         stage('data Loading'){
-            steps{
-                script{
-                    if("${env.BRANCH_NAME}"=='release'){
-                        echo "This is release branch"
-                     //   env.DATA_FILE='question.json'
-                        
-                       }
-                    if("${env.BRANCH_NAME}"=='main'){
-                            echo "This is release branch"
-                         //   env.DATA_FILE= "Questions-test.json"
-                        
-                    }
-                    
-                  //  echo "DATA_FILE_VALUE=${env.DATA_FILE}"
-                    echo "BRANCH_NAME=${env.BRANCH_NAME}"
-                }
-            }
-        }
+
         stage('Test') {
       steps {
           echo 'Testing..'
          sh 'npm test'
       }
-    }   
-     
-        stage('Build Docker Image') {
-            steps {
+    }    stage('Build Docker Image') 
+                    {
+                            steps {
       
-                echo "docker build...."
-                sh   "docker build -t ${appName}:V2 . "
+                        echo "docker build...."
+                        sh   "docker build -t ${appName}:V2 . "
                 
-                //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
-               //  sh "docker tag ${appName}:latest ${IMAGE_REPO}/${appName}:${VERSION}"
+                         //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
+                        //  sh "docker tag ${appName}:latest ${IMAGE_REPO}/${appName}:${VERSION}"
             
-            }
+                   }
         }
+        
+     stage('Docker run'){
+       steps{
+           
+              if("${env.BRANCH_NAME}"=='release'){
+                        echo "This is release branch"
+
+                   script{
+                          
+                        sudo "docker container run -e environment=dev -itd --name ${appName} -p 3000 "
+                    }
+                             echo 'Docker running....'
+                }
+               if("${env.BRANCH_NAME}"=='master'){
+                        echo "This is release branch"
+
+                   script{
+                          
+                        sudo "docker container run -e environment=dev -itd --name ${appName} -p 3000 "
+                    }
+                             echo 'Docker running....'
+                }
+              
+             }
+                        
+           }
+      
+       
         
         
         //***** The below piece of code will be  used to push the image to docker hub
@@ -100,18 +109,6 @@ pipeline {
        // sh 'docker push {dockerId}/{projectName}:${BUILD_NUMBER}'
       //}
   
-        stage('Docker run') {
-            steps {
-                script{
-                    
-                     sudo "docker container run -itd --name ${appName} -p 3000 "
-                    //sudo "docker container run -itd --name ${appName}:$env.BUILD_TAG -p 3000 "
-                  // sudo  docker container run -itd --name  nodejs-docker:$env.BUILD_NUMBER  -p 3000 
-                  // docker run ("-p 8096:3000 --rm --name nodejs-docker")
-                  //  docker run -p 8096:3000 nodejs-docker
-                }
-                echo 'Docker running....'
-            }
-        }
+       
     }
 }
