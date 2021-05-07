@@ -64,9 +64,9 @@ pipeline {
                                sudo "docker container run -e environment=dev -itd --name ${appName} -p 3000 "
                                echo 'Docker running....+${env.BRANCH_NAME}'
                                }
-                        if("${env.BRANCH_NAME}"=='master'){
+                        if("${env.BRANCH_NAME}"=='main'){
                               echo "This is  master branch"
-                               sudo "docker container run -e environment=dev -itd --name ${appName} -p 3000 "
+                               sudo "docker container run -e environment=test -itd --name ${appName} -p 3000 "
                                echo 'Docker running....+${env.BRANCH_NAME}'
                          }
                    }
