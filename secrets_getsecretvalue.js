@@ -41,8 +41,7 @@ function loadSecrets() {
             // Depending on whether the secret is a string or binary, one of these fields will be populated.
             if ('SecretString' in data) {
                 secret = data.SecretString;
-                console.log("Secrets from aws for secrets_get_secretvalue",secret);
-                process.env.DATA_FILE =secret;
+               Object.assign(process.env, JSON.parse(secret))
             } else {
                 let buff = new Buffer(data.SecretBinary, 'base64');
                 decodedBinarySecret = buff.toString('ascii');
