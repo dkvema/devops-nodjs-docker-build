@@ -26,12 +26,13 @@ pipeline {
     
     stages{
         stage('Clone the repository') {
-           
+            steps{
                 echo sh(script: 'env|sort', returnStdout: true)
                 echo 'cloning the respository..'
                 echo " build version: ${MAJOR_VERSION}.${env.BUILD_ID}"
                   echo "APPName:${appName}"
               checkout scm
+            }
          } 
             
       }
