@@ -1,4 +1,4 @@
-const {loadSecrets} = require('./secrets_getsecretvalue.js');
+const {loadSecrets} = require(`./secrets_getsecretvalue.js`);
 loadSecrets()
   .then(()=>{
     console.log(process.env);
