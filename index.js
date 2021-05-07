@@ -1,6 +1,7 @@
 const {loadSecrets} = require('./secrets_getsecretvalue.js');
 loadSecrets()
   .then(()=>{
+    console.log(process.env);
     const express = require('express');
     const path = require('path');
     const cookieParser = require('cookie-parser');
