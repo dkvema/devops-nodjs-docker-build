@@ -32,9 +32,32 @@ pipeline {
                 echo " build version: ${MAJOR_VERSION}.${env.BUILD_ID}"
                   echo "APPName:${appName}"
               checkout scm
+              }
+           } 
+      stage('NPM install') {
+            steps{
+                sh 'npm install' 
+                sh 'npm install dotenv' 
             }
-         } 
-            
+        }
+       stage('test') {
+            steps{
+               echo 'Testing..'
+              sh 'npm test'
+            }
+        } 
+        
+     stage('Docker build') {
+            steps{
+                    echo "docker build...."
+                     sh   "docker build -t ${appName}:V2 . "
+               //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
+               //  sh "docker tag ${appName}:latest ${IMAGE_REPO}/${appName}:${VERSION}"
+
+            }
+        }  
+        
+        
       }
 
     }
