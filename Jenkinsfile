@@ -61,12 +61,12 @@ pipeline {
                   script{
                         if("${env.BRANCH_NAME}"=='release'){
                               echo "This is release branch"
-                               sudo "docker container run -e environment=dev -itd --name ${appName} -p 3000 "
+                                "docker container run -e environment=dev -itd --name ${appName} -p 3000 "
                                echo 'Docker running....+${env.BRANCH_NAME}'
                                }
                         if("${env.BRANCH_NAME}"=='main'){
                               echo "This is  master branch"
-                               sudo "docker container run -e environment=test -itd --name ${appName} -p 3000 "
+                                "docker container run -e environment=test -itd --name ${appName} -p 3000 "
                                echo 'Docker running....+${env.BRANCH_NAME}'
                          }
                    }
