@@ -82,7 +82,7 @@ pipeline {
             steps {
       
                 echo "docker build...."
-                sh   "docker build -t ${appName} . "
+                sh   "docker build -t ${appName}:V2 . "
                 
                 //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
                //  sh "docker tag ${appName}:latest ${IMAGE_REPO}/${appName}:${VERSION}"
