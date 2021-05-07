@@ -2,7 +2,7 @@
 var AWS = require('aws-sdk'),
     //region = "singapore",
      region="ap-southeast-1",
-    secretName = "my-secrets-${env}",
+    secretName = "my-secrets-${environment}",
     secret,
     decodedBinarySecret;
     var client = new AWS.SecretsManager({
