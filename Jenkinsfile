@@ -46,55 +46,6 @@ pipeline {
          sh 'npm test'
         }
       }   
-        
-        stage('Build Docker Image') 
-                    {
-                            
-      
-                        echo "docker build...."
-                        sh   "docker build -t ${appName}:V2 . "
-                
-                         //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
-                        //  sh "docker tag ${appName}:latest ${IMAGE_REPO}/${appName}:${VERSION}"
-          }
-        
-     stage('Docker run'){
-      
-           
-              if("${env.BRANCH_NAME}"=='release'){
-                        echo "This is release branch"
-
-                   script{
-                         
-                       sudo "docker container run -e environment=dev -itd --name ${appName} -p 3000 "
-                       echo 'Docker running....+${env.BRANCH_NAME}'
-                    }
-                   
-                }
-               if("${env.BRANCH_NAME}"=='master'){
-                        echo "This is master branch"
-
-                   script{
-                        echo 'Docker running....+${env.BRANCH_NAME}'
-                        sudo "docker container run -e environment=dev -itd --name ${appName} -p 3000 "
-                    }
-                    echo 'Docker running....'
-                }
-                        
-           }
-      
-       
-        
-        
-        //***** The below piece of code will be  used to push the image to docker hub
-        
-      // stage('Push Docker Image'){
-       // withCredentials([string(credentialsId: 'DOKCER_HUB_PASSWORD', variable: 'DOKCER_HUB_PASSWORD')]) {
-        //  sh "docker login -u {dockerId} -p ${DOKCER_HUB_PASSWORD}"
-        //}
-       // sh 'docker push {dockerId}/{projectName}:${BUILD_NUMBER}'
-      //}
-  
        
     }
 }
