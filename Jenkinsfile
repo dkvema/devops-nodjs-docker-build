@@ -58,7 +58,7 @@ pipeline {
           echo 'Testing..'
          sh 'npm test'
       }
-    }    stage('Build Docker Image') 
+      stage('Build Docker Image') 
                     {
                             steps {
       
