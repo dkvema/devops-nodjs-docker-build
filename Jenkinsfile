@@ -58,25 +58,19 @@ pipeline {
         }  
       stage('Docker run') {
             steps{
-                if("${env.BRANCH_NAME}"=='release'){
-                      echo "This is release branch"
-                      script{
-                       sudo "docker container run -e environment=dev -itd --name ${appName} -p 3000 "
-                       echo 'Docker running....+${env.BRANCH_NAME}'
-                       }
-                 }
+                  script{
+                        if("${env.BRANCH_NAME}"=='release'){
+                              echo "This is release branch"
+                               sudo "docker container run -e environment=dev -itd --name ${appName} -p 3000 "
+                               echo 'Docker running....+${env.BRANCH_NAME}'
+                               }
+                        if("${env.BRANCH_NAME}"=='master'){
+                              echo "This is  master branch"
+                               sudo "docker container run -e environment=dev -itd --name ${appName} -p 3000 "
+                               echo 'Docker running....+${env.BRANCH_NAME}'
+                         }
+                   }
             }
-           steps{
-               if("${env.BRANCH_NAME}"=='master'){
-                        echo "This is master branch"
-                   script{
-                        echo 'Docker running....+${env.BRANCH_NAME}'
-                        sudo "docker container run -e environment=dev -itd --name ${appName} -p 3000 "
-                    }
-                    echo 'Docker running....'
-                }
-           }          
-           }
 
             }
         
