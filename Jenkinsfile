@@ -32,11 +32,9 @@ pipeline {
                 echo " build version: ${MAJOR_VERSION}.${env.BUILD_ID}"
                   echo "APPName:${appName}"
               checkout scm
-               // echo 'branch_nem'
-          
+         } 
             
-            
-        }
+      }
 
     }
     
