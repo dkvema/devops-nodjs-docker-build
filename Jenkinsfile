@@ -26,7 +26,7 @@ pipeline {
       tools {nodejs "NodeJS"}
     stages {
         stage('Clone the repository') {
-                echo sh(script: 'env|sort', returnStdout: true)
+                //echo sh(script: 'env|sort', returnStdout: true)
                 echo 'cloning the respository..'
                 echo " build version: ${MAJOR_VERSION}.${env.BUILD_ID}"
                 echo "APPName:${appName}"
