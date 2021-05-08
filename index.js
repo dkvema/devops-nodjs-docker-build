@@ -2,6 +2,8 @@ const {loadSecrets} = require('./secrets_getsecretvalue.js');
 loadSecrets()
   .then(()=>{
     console.log(process.env);
+  console.log('starting of index page envrionment from jenkins::::'+process.env.environment);
+  console.log('starting of index page envrionment from jenkins::::'+process.env.environment);
     const express = require('express');
     const path = require('path');
     const cookieParser = require('cookie-parser');
