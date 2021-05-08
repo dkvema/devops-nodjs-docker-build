@@ -56,13 +56,17 @@ pipeline {
         stage('Docker build') {
             steps{
                     echo "docker build...."
+             
+               script {
+               dockerImage = docker.build registry + ":$BUILD_NUMBER"
+               }
                 // app = docker.build("nodejs-docker")
                  // app = docker.build("${appName}:v1")
-                echo "docker build app details....+${app} "
-                      sh  "docker build -t ${appName}:versionTag  . "
+               // echo "docker build app details....+${app} "
+                    //  sh  "docker build -t ${appName}:versionTag  . "
                //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
                  //  docker tag   ${app}:latest ${BRANCH_NAME}/${app}:${VERSION}
-                echo "docker build app details....+${app} "
+               // echo "docker build app details....+${app} "
               //  docker tag [OPTIONS] IMAGE[:TAG] [REGISTRYHOST/][USERNAME/]NAME[:TAG]
 
             }
@@ -72,10 +76,11 @@ pipeline {
             steps{
              script{
                 echo "docker push...."
-                docker.withRegistry('https://registry.hub.docker.com', 'dockerhubrepository') 
+                docker.withRegistry('', registryCredential) 
+                 dockerImage.push()
                // docker.withRegistry('https://registry.hub.docker.com', 'dockerhubrepository') {            
                 //app.push("${env.BUILD_NUMBER}")            
-                app.push("latest")
+                //app.push("latest")
                      
                //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
                 // sh "docker tag ${appName}:latest ${IMAGE_REPO}/${appName}:${VERSION}"
