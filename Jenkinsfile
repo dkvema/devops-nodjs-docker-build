@@ -61,9 +61,9 @@ pipeline {
               
               
                 // app = docker.build("nodejs-docker")
-                   app = docker.build(appName:versiontag)
+                 //  app = docker.build(appName:versiontag)
                // echo "docker build app details....+${app} "
-                    //  sh  "docker build -t ${appName}:versionTag  . "
+                 app  =  sh "docker build -t ${appName}:versionTag  . "
                //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
                  //  docker tag   ${app}:latest ${BRANCH_NAME}/${app}:${VERSION}
                // echo "docker build app details....+${app} "
