@@ -4,11 +4,7 @@ def versiontag
 def dockerImageName
 def MAJOR_VERSION="1"
 def ARTIFACT_VERSION="${MAJOR_VERSION}.${BUILD_NUMBER}"
- environment { 
-     registry = "devendravemadevops/nodejs-docker"
-     //registryCredential = 'dockerhubrepository' 
-     dockerImage = ''
-    }
+
 def getGitCommitHash(){
     def result =sh(returnStdout:true,script:'git rev-parse--short HEAD'.trim())
     return result
@@ -21,6 +17,12 @@ def generateVersionTag(){
     
 }
 pipeline {
+ 
+  environment { 
+     registry = "devendravemadevops/nodejs-docker"
+     //registryCredential = 'dockerhubrepository' 
+     dockerImage = ''
+    }
     agent any
     
      options {
@@ -81,12 +83,12 @@ pipeline {
             steps{
              script{
                
-                docker.withRegistry('https://hub.docker.com/repository/docker/devendravemadevops/nodejs-docker','dockerhubrepository') 
-                          //docker.withRegistry('https://registry.hub.docker.com','dockerhubrepository') 
-                        { 
+                docker.withRegistry( '', registryCredential ) { 
+25
+                       
                           sh "docker push devendravemadevops/nodejs-docker:v1.0.0-${env.BUILD_ID} "
                            echo "docker push...."
-                        }
+                      
              }
         }  
         } 
