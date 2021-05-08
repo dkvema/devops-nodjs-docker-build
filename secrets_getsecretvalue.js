@@ -46,7 +46,7 @@ function loadSecrets() {
             if ('SecretString' in data) {
                 secret = data.SecretString;
                Object.assign(process.env, JSON.parse(secret))
-                console.log("Secrets from jenkins",secretName);
+                console.log("Secrets from aws secret manager",secretName);
             } else {
                 let buff = new Buffer(data.SecretBinary, 'base64');
                 decodedBinarySecret = buff.toString('ascii');
