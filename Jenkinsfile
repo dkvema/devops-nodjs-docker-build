@@ -1,4 +1,5 @@
-def appName='nodejs-docker-app'
+def appName='nodejs-docker-app1'
+def appName1='nodejs-docker-app2'
 def versiontag
 def dockerImageName
 def MAJOR_VERSION="1"
@@ -62,12 +63,12 @@ pipeline {
                         if("${env.BRANCH_NAME}"=='release'){
                               echo "This is release branch"
                                //sh "docker container run -e environment=dev -itd --name ${appName} -p 3000"
-                                sh "docker run --env environment=test -dp 8096:3000 nodejs-docker-app:V2"
+                                sh "docker run --env environment=test -dp 8096:3000 nodejs-docker-app1:V2"
                                echo 'Docker running....+${env.BRANCH_NAME}'
                                }
                         if("${env.BRANCH_NAME}"=='main'){
                               echo "This is  master branch"
-                            sh "docker run --env environment=dev -dp 8097:3001 nodejs-docker-app:V2"
+                            sh "docker run --env environment=dev -dp 8097:3001 nodejs-docker-app2:V2"
                               // sh  "docker container run -e environment=test -itd --name ${appName} -p 3000"
                                echo 'Docker running....+${env.BRANCH_NAME}'
                          }
