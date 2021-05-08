@@ -81,13 +81,12 @@ pipeline {
             steps{
              script{
                
-                docker.withRegistry('https://registry.hub.docker.com', 'dockerhubrepository') {          
-               // app.push("${env.BUILD_NUMBER}") 
-                 docker push devendravemadevops/nodejs-docker:v1.0.0-${env.BUILD_ID} 
-                //app.push()    
-               echo "docker push...."
+                          docker.withRegistry('https://registry.hub.docker.com','dockerhubrepository') 
+                        { 
+                          sh "docker push devendravemadevops/nodejs-docker:v1.0.0-${env.BUILD_ID} "
+                           echo "docker push...."
+                        }
              }
-            }
         }  
         } 
         stage('Docker stop container') {
