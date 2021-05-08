@@ -56,7 +56,7 @@ pipeline {
                 echo "docker build app details....+${app} "
                       //sh   "docker build -t ${appName}:V2 . "
                //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
-                //   docker tag ${appName}:latest ${BRANCH_NAME}/${appName}:${VERSION}"
+                   docker tag ${appName}:latest ${BRANCH_NAME}/${appName}:${VERSION}
                 echo "docker build app details....+${app} "
                 
 
@@ -66,7 +66,7 @@ pipeline {
         stage('upload image to dockerhub') {
             steps{
                 echo "docker push...."
-                docker.withRegistry('https://registry.hub.docker.com', 'git') {   
+                docker.withRegistry('https://registry.hub.docker.com', 'git') 
                // docker.withRegistry('https://registry.hub.docker.com', 'dockerhubrepository') {            
                 app.push("${env.BUILD_NUMBER}")            
                 app.push("latest")
@@ -91,13 +91,11 @@ pipeline {
                             sh "docker run --env environment=dev -dp 8096:3001 nodejs-docker-app:V2"
                               // sh  "docker container run -e environment=test -itd --name ${appName} -p 3000"
                                echo 'Docker running....+${env.BRANCH_NAME}'
-                         }
+                      }
                    }
-            }
-
-            }
-         
-        
+                 }
+               }  
+          
       }
 
     }
