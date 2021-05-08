@@ -62,12 +62,12 @@ pipeline {
                         if("${env.BRANCH_NAME}"=='release'){
                               echo "This is release branch"
                                //sh "docker container run -e environment=dev -itd --name ${appName} -p 3000"
-                                sh "docker run -dp 8096:3000 nodejs-docker-app:V2 -e environment=test"
+                                sh "docker run --env environment=test -dp 8096:3000 nodejs-docker-app:V2"
                                echo 'Docker running....+${env.BRANCH_NAME}'
                                }
                         if("${env.BRANCH_NAME}"=='main'){
                               echo "This is  master branch"
-                            sh "docker run -dp 8096:3000 nodejs-docker-app:V2 -e environment=test"
+                            sh "docker run --env environment=test -dp 8096:3000 nodejs-docker-app:V2"
                               // sh  "docker container run -e environment=test -itd --name ${appName} -p 3000"
                                echo 'Docker running....+${env.BRANCH_NAME}'
                          }
