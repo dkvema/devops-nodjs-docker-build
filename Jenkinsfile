@@ -5,8 +5,8 @@ def dockerImageName
 def MAJOR_VERSION="1"
 def ARTIFACT_VERSION="${MAJOR_VERSION}.${BUILD_NUMBER}"
  environment { 
-     registry = "devendravemadevops/devendravema-dockerimage"
-     registryCredential = 'dockerhubrepository' 
+     registry = "devendravemadevops/nodejs-docker"
+     //registryCredential = 'dockerhubrepository' 
      dockerImage = ''
     }
 def getGitCommitHash(){
@@ -58,7 +58,7 @@ pipeline {
                     echo "docker build...."
              
                script {
-               dockerImage = docker.build registry + ":$BUILD_NUMBER"
+               dockerImage = docker.build registry 
                }
                 // app = docker.build("nodejs-docker")
                  // app = docker.build("${appName}:v1")
@@ -71,7 +71,14 @@ pipeline {
 
             }
         }  
-        
+        stage('Docker stop container') {
+            steps {
+                 echo 'docker stop container'
+                //  sh   'docker stop $(docker ps -aq)'
+               sh   'docker ps -f name=nodejs-docker -q |xargs --no-run-if-empty docker container stop'
+              sh 'docker container ls -a -fname=nodejs-docker -q | xargs -r docker container rm'
+            }
+        }
       stage('upload image to dockerhub') {
             steps{
              script{
