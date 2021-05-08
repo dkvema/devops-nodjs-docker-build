@@ -71,7 +71,7 @@ pipeline {
       stage('upload image to dockerhub') {
             steps{
                 echo "docker push...."
-                docker.withRegistry('https://registry.hub.docker.com', 'dockerhubrepository')') 
+                docker.withRegistry('https://registry.hub.docker.com', 'dockerhubrepository') 
                // docker.withRegistry('https://registry.hub.docker.com', 'dockerhubrepository') {            
                 app.push("${env.BUILD_NUMBER}")            
                 app.push("latest")
