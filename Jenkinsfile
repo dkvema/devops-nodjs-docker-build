@@ -65,7 +65,7 @@ pipeline {
                // echo "docker build app details....+${app} "
                   // sh "export GIT_COMMIT=$(git log -1 --format=%h)"
                       app  =  sh "docker build -t ${appName}:v1.0.0  . "
-                      app  =  sh "docker  tag ${appName}:v1.0.0   devendravemadevops/nodejs-docker "
+                      app  =  sh "docker  tag ${appName}:v1.0.0   devendravemadevops/nodejs-docker:v1.0.0-${env.BUILD_ID} "
                      //app  =  sh "docker build -t ${appName}:v1.0.0  devendravemadevops/nodejs-docker:${env.BUILD_ID}  . "
                 // app  =  sh "docker build -t ${appName}:v1.0.0  devendravemadevops/nodejs-docker:$GIT_COMMIT  . "
                //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
