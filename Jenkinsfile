@@ -58,15 +58,9 @@ pipeline {
                     echo "docker build...."
              
                script {
-              
-              
-                // app = docker.build("nodejs-docker")
-                 //  app = docker.build(appName:versiontag)
-               // echo "docker build app details....+${app} "
                   // sh "export GIT_COMMIT=$(git log -1 --format=%h)"
                       app  =  sh "docker build -t ${appName}:v1.0.0  . "
                       app  =  sh "docker  tag ${appName}:v1.0.0   devendravemadevops/nodejs-docker:v1.0.0-${env.BUILD_ID} "
-                   
                      //echo " docker build app details....+${app} "
               
             }
@@ -77,13 +71,14 @@ pipeline {
             steps{
              script{
                
-                docker.withRegistry('https://registry.hub.docker.com', 'dockerhubrepository') {            
+                docker.withRegistry('https://registry.hub.docker.com', 'dockerhubrepository') {          
                // app.push("${env.BUILD_NUMBER}")            
                 app.push()    
                  echo "docker push...."
              }
             }
         }  
+        } 
         stage('Docker stop container') {
             steps {
                  echo 'docker stop container'
@@ -92,22 +87,7 @@ pipeline {
               sh 'docker container ls -a -fname=nodejs-docker -q | xargs -r docker container rm'
             }
         }
-      stage('upload image to dockerhub') {
-            steps{
-             script{
-                echo "docker push...."
-             //   docker.withRegistry('', registryCredential) 
-             //    dockerImage.push()
-               // docker.withRegistry('https://registry.hub.docker.com', 'dockerhubrepository') {            
-                //app.push("${env.BUILD_NUMBER}")            
-                //app.push("latest")
-                     
-               //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
-                // sh "docker tag ${appName}:latest ${IMAGE_REPO}/${appName}:${VERSION}"
-             }
-            }
-        }  
-
+     
       stage('Docker run') {
             steps{
                   script{
