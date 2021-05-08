@@ -4,6 +4,11 @@ def versiontag
 def dockerImageName
 def MAJOR_VERSION="1"
 def ARTIFACT_VERSION="${MAJOR_VERSION}.${BUILD_NUMBER}"
+ environment { 
+     registry = "devendravemadevops/devendravema-dockerimage"
+     registryCredential = 'dockerhubrepository' 
+     dockerImage = ''
+    }
 def getGitCommitHash(){
     def result =sh(returnStdout:true,script:'git rev-parse--short HEAD'.trim())
     return result
@@ -48,34 +53,27 @@ pipeline {
             }
         } 
         
-     stage('Docker build') {
-            steps{
-                    echo "docker build...."
-                // app = docker.build("nodejs-docker")
-                  app = docker.build("${appName}:v1")
-                echo "docker build app details....+${app} "
-                      //sh   "docker build -t ${appName}:V2 . "
-               //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
-                   docker tag ("${app}:latest ${BRANCH_NAME}/${app}:${VERSION}")
-                echo "docker build app details....+${app} "
-                
-
-            }
-        }  
+         stage('Building our image') { 
+            steps { 
+                script { 
+                    dockerImage = docker.build registry + ":$appName" + ":$BUILD_NUMBER" 
+                }
+            } 
+        }
         
-        stage('upload image to dockerhub') {
-            steps{
-                echo "docker push...."
-                docker.withRegistry('https://registry.hub.docker.com', 'git') 
-               // docker.withRegistry('https://registry.hub.docker.com', 'dockerhubrepository') {            
-                app.push("${env.BUILD_NUMBER}")            
-                app.push("latest")
-                     
-               //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
-                // sh "docker tag ${appName}:latest ${IMAGE_REPO}/${appName}:${VERSION}"
-
+        stage('upload to docker hub') { 
+            steps { 
+                script { 
+                    docker.withRegistry( '', registryCredential ) { 
+                        dockerImage.push() 
+                    }
+                } 
             }
-        }  
+        } 
+        
+       
+        
+       
         
       stage('Docker run') {
             steps{
