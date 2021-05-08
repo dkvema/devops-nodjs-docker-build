@@ -97,7 +97,7 @@ pipeline {
                  echo 'docker images'
                     sh 'docker ps -a'
                     sh 'docker stop $(docker ps -a -q)'
-                    sh 'docker rm $(docker ps -a -q)'
+                    //sh 'docker rm $(docker ps -a -q)'
                     sh 'docker system prune -a -f'
                 
               // sh   'docker ps -f name=nodejs-docker -q |xargs --no-run-if-empty docker container stop'
