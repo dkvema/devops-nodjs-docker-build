@@ -76,7 +76,7 @@ pipeline {
                       app  =  sh "docker  tag ${appName}:v1.0.0   devendravemadevops/release-nodejsdocker:v1.0.0-${env.BUILD_ID} "
                }
                  
-                 f("${env.BRANCH_NAME}"=='staging'){
+                 if("${env.BRANCH_NAME}"=='staging'){
                script {
                   // sh "export GIT_COMMIT=$(git log -1 --format=%h)"
                       app  =  sh "docker  tag ${appName}:v1.0.0   devendravemadevops/staging-nodejsdocker:v1.0.0-${env.BUILD_ID} "
@@ -135,9 +135,8 @@ pipeline {
                         if("${env.BRANCH_NAME}"=='main'){
                               echo "This is  master branch"
                              docker.withRegistry( '', registryCredential ) { 
-                               // sh "docker run --env environment=test -dp 8096:3000 devendravemadevops/nodejs-docker:v1.0.0-137" //this to pull image from dockerhub and run
-                                sh "docker run --env environment=dev -dp 8096:3000 devendravemadevops/nodejs-docker:v1.0.0-${env.BUILD_ID}" //This is to latest build
-                          //  sh "docker run --env environment=dev -dp 8096:3001 nodejs-docker-app:V2"
+                     
+                                sh "docker run --env environment=dev -dp 8096:3000 devendravemadevops/nodejs-docker:v1.0.0-${env.BUILD_ID}"
                               // sh  "docker container run -e environment=test -itd --name ${appName} -p 3000"
                                echo 'Docker running....+${env.BRANCH_NAME}'
                              }
