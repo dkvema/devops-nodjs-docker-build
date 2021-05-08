@@ -107,15 +107,20 @@ pipeline {
                         if("${env.BRANCH_NAME}"=='release'){
                               echo "This is release branch"
                                //sh "docker container run -e environment=dev -itd --name ${appName} -p 3000"
-                                sh "docker run --env environment=test -dp 8097:3000 devendravemadevops/nodejs-docker:v1.0.0-137"
+                             docker.withRegistry( '', registryCredential ) { 
+                                sh "docker run --env environment=test -dp 8097:3000 devendravemadevops/nodejs-docker:v1.0.0-${env.BUILD_ID}"
                                echo 'Docker running....+${env.BRANCH_NAME}'
+                             }
                                }
                         if("${env.BRANCH_NAME}"=='main'){
                               echo "This is  master branch"
-                                sh "docker run --env environment=dev -dp 8096:3001 nodejs-docker-app:V2"
+                             docker.withRegistry( '', registryCredential ) { 
+                               // sh "docker run --env environment=test -dp 8096:3000 devendravemadevops/nodejs-docker:v1.0.0-137" //this to pull image from dockerhub and run
+                                sh "docker run --env environment=dev -dp 8096:3000 devendravemadevops/nodejs-docker:v1.0.0-${env.BUILD_ID}" //This is to latest build
                           //  sh "docker run --env environment=dev -dp 8096:3001 nodejs-docker-app:V2"
                               // sh  "docker container run -e environment=test -itd --name ${appName} -p 3000"
                                echo 'Docker running....+${env.BRANCH_NAME}'
+                             }
                       }
                    }
                  }
