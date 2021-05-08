@@ -84,7 +84,6 @@ pipeline {
              script{
                
                 docker.withRegistry( '', registryCredential ) { 
-25
                        
                           sh "docker push devendravemadevops/nodejs-docker:v1.0.0-${env.BUILD_ID} "
                            echo "docker push...."
