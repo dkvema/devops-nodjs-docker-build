@@ -82,11 +82,21 @@ pipeline {
         stage('upload image to dockerhub') {
             steps{
              script{
-               
+                 if("${env.BRANCH_NAME}"=='release'){
                 docker.withRegistry( '', registryCredential ) { 
                        
-                          sh "docker push devendravemadevops/nodejs-docker:v1.0.0-${env.BUILD_ID} "
+                          sh "docker push devendravemadevops/release-nodejsdocker:v1.0.0-${env.BUILD_ID} "
                            echo "docker push...."
+                   }
+                 }  
+                 if("${env.BRANCH_NAME}"=='staging'){
+                     
+                     docker.withRegistry( '', registryCredential ) { 
+                       
+                          sh "docker push devendravemadevops/staging-nodejsdocker:v1.0.0-${env.BUILD_ID} "
+                           echo "docker push...."
+                     
+                 }
                 } 
              }
         }  
