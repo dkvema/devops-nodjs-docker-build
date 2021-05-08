@@ -24,6 +24,6 @@ loadSecrets()
     app.listen(port, function () {
       console.log('Example app listening on port ' + port);
       console.log('index page secrets::::'+process.env.DATA_FILE);
-      console.log('index page ENVIRONMENT:::'+process.env.ENVIRONMENT);
+     // console.log('index page ENVIRONMENT:::'+process.env.ENVIRONMENT);
     });
   });
