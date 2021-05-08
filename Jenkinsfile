@@ -58,10 +58,20 @@ pipeline {
                     echo "docker build...."
              
                script {
+             
+                  sh "docker build -t ${appName}:v1.0.0  . "
+              
+            }
+            }
+        }  
+     
+     stage('Docker Tagginng') {
+            steps{
+                    echo "docker Tagging...."
+             
+               script {
                   // sh "export GIT_COMMIT=$(git log -1 --format=%h)"
-                      app  =  sh "docker build -t ${appName}:v1.0.0  . "
                       app  =  sh "docker  tag ${appName}:v1.0.0   devendravemadevops/nodejs-docker:v1.0.0-${env.BUILD_ID} "
-                     //echo " docker build app details....+${app} "
               
             }
             }
@@ -72,9 +82,10 @@ pipeline {
              script{
                
                 docker.withRegistry('https://registry.hub.docker.com', 'dockerhubrepository') {          
-               // app.push("${env.BUILD_NUMBER}")            
-                app.push()    
-                 echo "docker push...."
+               // app.push("${env.BUILD_NUMBER}") 
+                 docker push devendravemadevops/nodejs-docker:v1.0.0-${env.BUILD_ID} 
+                //app.push()    
+               echo "docker push...."
              }
             }
         }  
