@@ -70,11 +70,18 @@ pipeline {
      stage('Docker Tagginng') {
             steps{
                     echo "docker Tagging...."
-             
+             if("${env.BRANCH_NAME}"=='release'){
                script {
                   // sh "export GIT_COMMIT=$(git log -1 --format=%h)"
-                      app  =  sh "docker  tag ${appName}:v1.0.0   devendravemadevops/nodejs-docker:v1.0.0-${env.BUILD_ID} "
-              
+                      app  =  sh "docker  tag ${appName}:v1.0.0   devendravemadevops/release-nodejsdocker:v1.0.0-${env.BUILD_ID} "
+               }
+                 
+                 f("${env.BRANCH_NAME}"=='staging'){
+               script {
+                  // sh "export GIT_COMMIT=$(git log -1 --format=%h)"
+                      app  =  sh "docker  tag ${appName}:v1.0.0   devendravemadevops/staging-nodejsdocker:v1.0.0-${env.BUILD_ID} "
+               }
+                     
             }
             }
         }  
