@@ -15,7 +15,7 @@ def getGitCommitHash(){
 }
 def generateVersionTag(){
     def gitCommitHash=getGitCommitHash() 
-    versionTag=${env.BUILD_NUMBER} + "-"+gitCommitHash
+    versionTag= ${env.BRANCH_NAME} + ${env.BUILD_NUMBER} + "-"+gitCommitHash
     return versionTag
     
     
@@ -59,9 +59,9 @@ pipeline {
                 // app = docker.build("nodejs-docker")
                   app = docker.build("${appName}:v1")
                 echo "docker build app details....+${app} "
-                      //sh   "docker build -t ${appName}:V2 . "
+                      app = docker build -t ${appName}:versionTag . 
                //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
-                   docker tag ${app}:latest ${BRANCH_NAME}/${app}:${VERSION}
+                 //  docker tag   ${app}:latest ${BRANCH_NAME}/${app}:${VERSION}
                 echo "docker build app details....+${app} "
               //  docker tag [OPTIONS] IMAGE[:TAG] [REGISTRYHOST/][USERNAME/]NAME[:TAG]
 
