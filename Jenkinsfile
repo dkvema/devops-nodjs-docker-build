@@ -51,11 +51,11 @@ pipeline {
      stage('Docker build') {
             steps{
                     echo "docker build...."
-                 app = docker.build("nodejs-docker/dev")
+                 app = docker.build("nodejs-docker")
                 echo "docker build app details....+${app} "
                       //sh   "docker build -t ${appName}:V2 . "
                //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
-                   docker tag ${appName}:latest ${IMAGE_REPO}/${appName}:${VERSION}"
+                   docker tag ${appName}:latest ${BRANCH_NAME}/${appName}:${VERSION}"
                 echo "docker build app details....+${app} "
                 
 
