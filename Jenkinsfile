@@ -56,7 +56,7 @@ pipeline {
                 echo "docker build app details....+${app} "
                       //sh   "docker build -t ${appName}:V2 . "
                //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
-                   docker tag ${appName}:latest ${BRANCH_NAME}/${appName}:${VERSION}
+                   docker tag ${app}:latest ${BRANCH_NAME}/${app}:${VERSION}
                 echo "docker build app details....+${app} "
                 
 
