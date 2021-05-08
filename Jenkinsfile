@@ -61,7 +61,8 @@ pipeline {
                   script{
                         if("${env.BRANCH_NAME}"=='release'){
                               echo "This is release branch"
-                               sh "docker container run -e environment=dev -itd --name ${appName} -p 3000"
+                               //sh "docker container run -e environment=dev -itd --name ${appName} -p 3000"
+                                sh docker run -dp 8096:3000 nodejs-docker-app:V2 -e ENVIRONMENT=test
                                echo 'Docker running....+${env.BRANCH_NAME}'
                                }
                         if("${env.BRANCH_NAME}"=='main'){
