@@ -88,7 +88,7 @@ pipeline {
                        
                           sh "docker push devendravemadevops/nodejs-docker:v1.0.0-${env.BUILD_ID} "
                            echo "docker push...."
-                      
+                } 
              }
         }  
         } 
