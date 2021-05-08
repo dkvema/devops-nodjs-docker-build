@@ -80,8 +80,9 @@ pipeline {
         stage('upload image to dockerhub') {
             steps{
              script{
-               
-                          docker.withRegistry('https://registry.hub.docker.com','dockerhubrepository') 
+               https://hub.docker.com/repository/docker/devendravemadevops/nodejs-docker
+                docker.withRegistry('https://hub.docker.com/repository/docker/devendravemadevops/nodejs-docker','dockerhubrepository') 
+                          //docker.withRegistry('https://registry.hub.docker.com','dockerhubrepository') 
                         { 
                           sh "docker push devendravemadevops/nodejs-docker:v1.0.0-${env.BUILD_ID} "
                            echo "docker push...."
