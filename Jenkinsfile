@@ -1,4 +1,5 @@
-def appName='nodejs-docker-app'
+def appName='nodejs-docker'
+def app
 def versiontag
 def dockerImageName
 def MAJOR_VERSION="1"
@@ -50,12 +51,31 @@ pipeline {
      stage('Docker build') {
             steps{
                     echo "docker build...."
-                     sh   "docker build -t ${appName}:V2 . "
+                 app = docker.build("nodejs-docker/dev")
+                echo "docker build app details....+${app} "
+                      //sh   "docker build -t ${appName}:V2 . "
                //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
-               //  sh "docker tag ${appName}:latest ${IMAGE_REPO}/${appName}:${VERSION}"
+                   docker tag ${appName}:latest ${IMAGE_REPO}/${appName}:${VERSION}"
+                echo "docker build app details....+${app} "
+                
 
             }
         }  
+        
+        stage('upload image to dockerhub') {
+            steps{
+                echo "docker push...."
+                docker.withRegistry('https://registry.hub.docker.com', 'git') {   
+               // docker.withRegistry('https://registry.hub.docker.com', 'dockerhubrepository') {            
+                app.push("${env.BUILD_NUMBER}")            
+                app.push("latest")
+                     
+               //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
+                // sh "docker tag ${appName}:latest ${IMAGE_REPO}/${appName}:${VERSION}"
+
+            }
+        }  
+        
       stage('Docker run') {
             steps{
                   script{
@@ -75,6 +95,7 @@ pipeline {
             }
 
             }
+         
         
       }
 
