@@ -63,7 +63,7 @@ pipeline {
                 // app = docker.build("nodejs-docker")
                  //  app = docker.build(appName:versiontag)
                // echo "docker build app details....+${app} "
-                   sh "export GIT_COMMIT=$(git log -1 --format=%h)
+                   sh "export GIT_COMMIT=$(git log -1 --format=%h)"
                  app  =  sh "docker build -t ${appName}:v1.0.0  devendravemadevops/nodejs-docker:$GIT_COMMIT  . "
                //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
                  //  docker tag   ${app}:latest ${BRANCH_NAME}/${app}: ${VERSION}
