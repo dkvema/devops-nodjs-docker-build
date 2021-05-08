@@ -66,13 +66,22 @@ pipeline {
                   // sh "export GIT_COMMIT=$(git log -1 --format=%h)"
                       app  =  sh "docker build -t ${appName}:v1.0.0  . "
                       app  =  sh "docker  tag ${appName}:v1.0.0   devendravemadevops/nodejs-docker:v1.0.0-${env.BUILD_ID} "
-                     //app  =  sh "docker build -t ${appName}:v1.0.0  devendravemadevops/nodejs-docker:${env.BUILD_ID}  . "
-                // app  =  sh "docker build -t ${appName}:v1.0.0  devendravemadevops/nodejs-docker:$GIT_COMMIT  . "
-               //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
-                 //  docker tag   ${app}:latest ${BRANCH_NAME}/${app}: ${VERSION}
-                 echo " docker build app details....+${app} "
-              //  docker tag [OPTIONS] IMAGE[:TAG] [REGISTRYHOST/][USERNAME/]NAME[:TAG]
+                   
+                     //echo " docker build app details....+${app} "
+              
             }
+            }
+        }  
+     
+        stage('upload image to dockerhub') {
+            steps{
+             script{
+               
+                docker.withRegistry('https://registry.hub.docker.com', 'dockerhubrepository') {            
+               // app.push("${env.BUILD_NUMBER}")            
+                app.push()    
+                 echo "docker push...."
+             }
             }
         }  
         stage('Docker stop container') {
