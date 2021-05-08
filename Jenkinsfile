@@ -70,15 +70,16 @@ pipeline {
         
       stage('upload image to dockerhub') {
             steps{
+             script{
                 echo "docker push...."
                 docker.withRegistry('https://registry.hub.docker.com', 'dockerhubrepository') 
                // docker.withRegistry('https://registry.hub.docker.com', 'dockerhubrepository') {            
-                app.push("${env.BUILD_NUMBER}")            
+                //app.push("${env.BUILD_NUMBER}")            
                 app.push("latest")
                      
                //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
                 // sh "docker tag ${appName}:latest ${IMAGE_REPO}/${appName}:${VERSION}"
-
+             }
             }
         }  
 
