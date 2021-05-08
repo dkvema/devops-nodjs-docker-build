@@ -80,7 +80,7 @@ pipeline {
         stage('upload image to dockerhub') {
             steps{
              script{
-               https://hub.docker.com/repository/docker/devendravemadevops/nodejs-docker
+               
                 docker.withRegistry('https://hub.docker.com/repository/docker/devendravemadevops/nodejs-docker','dockerhubrepository') 
                           //docker.withRegistry('https://registry.hub.docker.com','dockerhubrepository') 
                         { 
