@@ -20,7 +20,7 @@ pipeline {
  
   environment { 
      registry = "devendravemadevops/nodejs-docker"
-     //registryCredential = 'dockerhubrepository' 
+     registryCredential = 'dockerhubrepository' 
      dockerImage = ''
     }
     agent any
