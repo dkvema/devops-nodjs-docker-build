@@ -36,7 +36,7 @@ pipeline {
                 echo sh(script: 'env|sort', returnStdout: true)
                 echo 'cloning the respository..'
                 echo " build version: ${MAJOR_VERSION}.${env.BUILD_ID}"
-                  echo "APPName:${appName}"
+                  echo "code commited from repository APPName:${appName}"
               checkout scm
               }
            } 
@@ -66,7 +66,7 @@ pipeline {
                  app  =  sh "docker build -t ${appName}:versionTag  . "
                //** Below line will be used while tag with versioning and been used while uploading  image to docker repository and while deploying the same.
                  //  docker tag   ${app}:latest ${BRANCH_NAME}/${app}:${VERSION}
-               // echo "docker build app details....+${app} "
+                 echo " docker build app details....+${app} "
               //  docker tag [OPTIONS] IMAGE[:TAG] [REGISTRYHOST/][USERNAME/]NAME[:TAG]
             }
             }
