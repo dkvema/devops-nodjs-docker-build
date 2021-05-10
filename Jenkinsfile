@@ -1,4 +1,4 @@
-def appName='nodejs-docker'
+def appName='nodejs-docker1'
 def app
 def versiontag
 def dockerImageName
